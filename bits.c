@@ -183,7 +183,7 @@ int bitAnd(int x, int y) {
  *   Rating: 2 
  */
 int leastBitPos(int x) {
-  return 2;
+  return x&(~x+1);
 }
 /* 
  * replaceByte(x,n,c) - Replace byte n in x with c
