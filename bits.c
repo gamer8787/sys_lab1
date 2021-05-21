@@ -195,7 +195,15 @@ int leastBitPos(int x) {
  *   Rating: 3
  */
 int replaceByte(int x, int n, int c) {
-  return 2;
+  int front,mid,end,minus,temp;
+  int n1;
+  n1=n<<3;
+  minus=(~0);
+  temp= (minus<<n1);
+  front = temp<<8;
+  end = ~temp;
+  mid = c<<(n1);
+  return ((x&front)|(x&end))|mid;
 }
 /* 
  * bang - Compute !x without using !
@@ -205,7 +213,7 @@ int replaceByte(int x, int n, int c) {
  *   Rating: 4 
  */
 int bang(int x) {
-  return 2;
+  return ((x|(~x+1))>>31)+1;  
 }
 /*
  * leftBitCount - returns count of number of consective 1's in
@@ -216,7 +224,18 @@ int bang(int x) {
  *   Rating: 4
  */
 int leftBitCount(int x) {
-  return 2;
+  int a,b;
+  a=!((x>>16)+1); //if x have 16 consecutive 1's than a=1 otherwise 0;
+  b=8+a<<4; //b=8 or 24
+  c=!((x>>b)+1); // if x have 8 or 24 consecutive 1's than c=1 otherwise 0;
+  d=4+c<<3+a<<4;
+  e=!((x>>d)+1);
+  f=2+e<<2+c<<3+a<<4;
+  g=!((x>>f)+1);
+  h=1+g<<1+e<<2+c<<3+a<<4;
+  i=!((x>>h)+1);
+  j=i+g<<1+e<<2+c<<3+a<<4;
+  return j;
 }
 /* 
  * TMax - return maximum two's complement integer 
